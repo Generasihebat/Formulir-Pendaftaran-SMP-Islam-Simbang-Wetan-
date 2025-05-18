@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pendaftaran Online - SMP Islam Simbang Wetan</title>
+    <style>
+        :root {
+            --primary-color: #2c8a4a;
+            --primary-dark: #24773d;
+            --secondary-color: #f8f9fa;
+            --text-color: #333;
+            --light-gray: #f5f5f5;
+            --white: #ffffff;
+            --shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        body {
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: var(--light-gray);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: var(--white);
+            padding: 30px 20px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: "";
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), transparent);
+            transform: rotate(-5deg);
+            z-index: -1;
+        }
+        
+        .header h1 {
+            margin: 15px 0 5px;
+            font-size: 28px;
+            font-weight: 700;
+        }
+        
+        .header p {
+            margin: 5px 0;
+            font-size: 18px;
+            font-weight: 400;
+        }
+        
+        .form-container {
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+        }
+        
+        .form-section {
+            margin-bottom: 30px;
+        }
+        
+        .form-section h2 {
+            color: var(--primary-color);
+            font-size: 20px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary-color);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+        }
+        
+        input[type="text"],
+        input[type="date"],
+        input[type="email"],
+        input[type="tel"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            box-sizing: border-box;
+            transition: border 0.3s, box-shadow 0.3s;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(44, 138, 74, 0.2);
+        }
+        
+        textarea {
+            height: 120px;
+            resize: vertical;
+        }
+        
+        .required:after {
+            content: " *";
+            color: #e74c3c;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(to right, var(--primary-color), var(--primary-dark));
+            color: var(--white);
+            border: none;
+            padding: 15px 25px;
+            font-size: 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: 600;
+            transition: all 0.3s;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-top: 10px;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(44, 138, 74, 0.4);
+        }
+        
+        .note {
+            font-size: 14px;
+            color: #777;
+            margin-top: 8px;
+            font-style: italic;
+        }
+        
+        .school-logo {
+            width: 120px;
+            height: 120px;
+            object-fit: contain;
+            border-radius: 50%;
+            border: 3px solid var(--white);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            background-color: var(--white);
+            transition: transform 0.3s;
+        }
+        
+        .school-logo:hover {
+            transform: scale(1.05);
+        }
+        
+        .radio-group {
+            display: flex;
+            gap: 25px;
+            margin-top: 8px;
+        }
+        
+        .radio-option {
+            display: flex;
+            align-items: center;
+        }
+        
+        .radio-option input {
+            margin-right: 8px;
+            width: 18px;
+            height: 18px;
+            accent-color: var(--primary-color);
+        }
+        
+        .radio-option label {
+            margin-bottom: 0;
+            font-weight: 500;
+        }
+        
+        .footer {
+            text-align: center;
+            color: #777;
+            font-size: 14px;
+            margin-top: 30px;
+            padding: 20px 0;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            
+            .header {
+                padding: 20px 15px;
+            }
+            
+            .header h1 {
+                font-size: 24px;
+            }
+            
+            .form-container {
+                padding: 20px;
+            }
+            
+            .radio-group {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="header">
+        <img src="https://ik.imagekit.io/nxshmubxa/Logopit_1747567530656.png?updatedAt=1747567560832" alt="Logo SMP Islam Simbang Wetan" class="school-logo">
+        <h1>FORMULIR PENDAFTARAN ONLINE</h1>
+        <p>SMP ISLAM SIMBANG WETAN</p>
+        <p>Tahun Ajaran 2025/2026</p>
+    </div>
+    
+    <div class="form-container">
+        <form id="pendaftaranForm">
+            <div class="form-section">
+                <h2>DATA CALON SISWA</h2>
+                
+                <div class="form-group">
+                    <label for="nama_lengkap" class="required">Nama Lengkap</label>
+                    <input type="text" id="nama_lengkap" name="nama_lengkap" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="required">Jenis Kelamin</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="laki" name="jenis_kelamin" value="Laki-laki" required>
+                            <label for="laki">Laki-laki</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="perempuan" name="jenis_kelamin" value="Perempuan">
+                            <label for="perempuan">Perempuan</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="tempat_lahir" class="required">Tempat Lahir</label>
+                    <input type="text" id="tempat_lahir" name="tempat_lahir" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="tanggal_lahir" class="required">Tanggal Lahir</label>
+                    <input type="date" id="tanggal_lahir" name="tanggal_lahir" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="alamat" class="required">Alamat Lengkap</label>
+                    <textarea id="alamat" name="alamat" required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="asal_sekolah" class="required">Asal Sekolah (SD/MI)</label>
+                    <input type="text" id="asal_sekolah" name="asal_sekolah" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="required">Pilihan Mondok</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="mondok_ya" name="mondok" value="Ya" required>
+                            <label for="mondok_ya">Ya, akan mondok</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="mondok_tidak" name="mondok" value="Tidak">
+                            <label for="mondok_tidak">Tidak, pulang pergi</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="no_hp" class="required">Nomor HP/WhatsApp</label>
+                    <input type="tel" id="no_hp" name="no_hp" required>
+                    <p class="note">Nomor yang aktif untuk menerima informasi pendaftaran</p>
+                </div>
+            </div>
+            
+            <div class="form-section">
+                <h2>DATA ORANG TUA/WALI</h2>
+                
+                <div class="form-group">
+                    <label for="nama_ayah" class="required">Nama Ayah</label>
+                    <input type="text" id="nama_ayah" name="nama_ayah" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="nama_ibu" class="required">Nama Ibu</label>
+                    <input type="text" id="nama_ibu" name="nama_ibu" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="pekerjaan_ayah">Pekerjaan Ayah</label>
+                    <input type="text" id="pekerjaan_ayah" name="pekerjaan_ayah">
+                </div>
+                
+                <div class="form-group">
+                    <label for="pekerjaan_ibu">Pekerjaan Ibu</label>
+                    <input type="text" id="pekerjaan_ibu" name="pekerjaan_ibu">
+                </div>
+                
+                <div class="form-group">
+                    <label for="no_hp_ortu" class="required">Nomor HP Orang Tua</label>
+                    <input type="tel" id="no_hp_ortu" name="no_hp_ortu" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email (opsional)</label>
+                    <input type="email" id="email" name="email">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <button type="submit" class="submit-btn">KIRIM PENDAFTARAN</button>
+            </div>
+            
+            <p class="note">* Setelah mengisi formulir ini, calon siswa akan dihubungi oleh panitia pendaftaran untuk proses selanjutnya.</p>
+        </form>
+    </div>
+    
+    <div class="footer">
+        SMP Islam Simbang Wetan &copy; 2025 - Formulir Pendaftaran Online
+    </div>
+    
+    <script>
+        document.getElementById('pendaftaranForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Validasi form
+            const namaLengkap = document.getElementById('nama_lengkap').value;
+            const noHp = document.getElementById('no_hp').value;
+            const noHpOrtu = document.getElementById('no_hp_ortu').value;
+            
+            if(namaLengkap.trim() === '') {
+                alert('Nama lengkap harus diisi');
+                return;
+            }
+            
+            if(noHp.trim() === '' || noHp.length < 10) {
+                alert('Nomor HP siswa harus diisi dengan benar (minimal 10 digit)');
+                return;
+            }
+            
+            if(noHpOrtu.trim() === '' || noHpOrtu.length < 10) {
+                alert('Nomor HP orang tua harus diisi dengan benar (minimal 10 digit)');
+                return;
+            }
+            
+            // Mengumpulkan data form
+            const formData = new FormData(this);
+            let message = "📋 *PENDAFTARAN SISWA BARU SMP ISLAM SIMBANG WETAN* 📋\n";
+            message += "Tahun Ajaran 2025/2026\n\n";
+            
+            // Membuat pesan WhatsApp
+            message += "🔹 *DATA CALON SISWA*\n";
+            message += `▫️ Nama Lengkap: ${formData.get('nama_lengkap')}\n`;
+            message += `▫️ Jenis Kelamin: ${formData.get('jenis_kelamin')}\n`;
+            message += `▫️ Tempat/Tgl Lahir: ${formData.get('tempat_lahir')}, ${formData.get('tanggal_lahir')}\n`;
+            message += `▫️ Alamat: ${formData.get('alamat')}\n`;
+            message += `▫️ Asal Sekolah: ${formData.get('asal_sekolah')}\n`;
+            message += `▫️ Pilihan Mondok: ${formData.get('mondok')}\n`;
+            message += `▫️ No. HP: ${formData.get('no_hp')}\n\n`;
+            
+            message += "🔹 *DATA ORANG TUA*\n";
+            message += `▫️ Nama Ayah: ${formData.get('nama_ayah')}\n`;
+            message += `▫️ Nama Ibu: ${formData.get('nama_ibu')}\n`;
+            message += `▫️ Pekerjaan Ayah: ${formData.get('pekerjaan_ayah') || '-'}\n`;
+            message += `▫️ Pekerjaan Ibu: ${formData.get('pekerjaan_ibu') || '-'}\n`;
+            message += `▫️ No. HP Orang Tua: ${formData.get('no_hp_ortu')}\n`;
+            message += `▫️ Email: ${formData.get('email') || '-'}\n\n`;
+            
+            message += "Terima kasih telah mendaftar. Panitia akan segera menghubungi Anda.\n";
+            message += "Salam, Panitia PPDB SMP Islam Simbang Wetan";
+            
+            // Encode pesan untuk URL WhatsApp
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappNumber = "6285166444467";
+            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+            
+            // Buka WhatsApp dengan pesan yang sudah disiapkan
+            window.open(whatsappUrl, '_blank');
+            
+            // Reset form setelah pengiriman (opsional)
+            this.reset();
+            
+            // Tampilkan pesan sukses
+            alert('Formulir pendaftaran berhasil dikirim! Kami akan menghubungi Anda segera.');
+        });
+        
+        // Format nomor HP saat ketik
+        document.getElementById('no_hp').addEventListener('input', function(e) {
+            this.value = this.value.replace(/[^0-9]/g, '');
+        });
+        
+        document.getElementById('no_hp_ortu').addEventListener('input', function(e) {
+            this.value = this.value.replace(/[^0-9]/g, '');
+        });
+    </script>
+</body>
+</html>
